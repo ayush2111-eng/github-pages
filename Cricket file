@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Cricket Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .scoreboard {
+      margin-top: 20px;
+      font-size: 1.5em;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background-color: #218838;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple Cricket Game</h1>
+  <div class="scoreboard">
+    Score: <span id="score">0</span> <br>
+    Wickets: <span id="wickets">0</span>
+  </div>
+  <button class="btn" onclick="playShot()">Hit the Ball!</button>
+  <div class="message" id="message"></div>
+
+  <script>
+    let score = 0;
+    let wickets = 0;
+
+    function playShot() {
+      if (wickets >= 10) {
+        document.getElementById('message').textContent = "Game Over! Refresh to play again.";
+        return;
+      }
+
+      // Randomly generate runs or an out
+      const outcomes = [0, 1, 2, 3, 4, 6, 'OUT'];
+      const result = outcomes[Math.floor(Math.random() * outcomes.length)];
+
+      if (result === 'OUT') {
+        wickets++;
+        document.getElementById('message').textContent = "You got OUT!";
+      } else {
+        score += result;
+        document.getElementById('message').textContent = `You scored ${result} runs!`;
+      }
+
+      // Update scoreboard
+      document.getElementById('score').textContent = score;
+      document.getElementById('wickets').textContent = wickets;
+    }
+  </script>
+</body>
+</html>
